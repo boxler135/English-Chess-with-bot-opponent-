@@ -20,8 +20,12 @@ class Main:
         self.game = Game()
 
     def mainloop(self):
+
+        screen = self.screen
+        game = self.game
+
         while 1:
-            self.game.show_bg(surface=self.screen)
+            self.game.show_bg(screen)
 
             for event in pygame.event.get():
                 if event.type== pygame.QUIT:
