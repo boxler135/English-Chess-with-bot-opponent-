@@ -10,12 +10,14 @@ from settings import (
     SQSIZE
 )
 from board import Board
+from dragger import Dragger
 
 
 class Game:
 
     def __init__(self):
         self.board = Board()
+        self.dragger = Dragger()
     
     ## show methods
 
