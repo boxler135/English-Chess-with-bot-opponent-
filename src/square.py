@@ -33,7 +33,7 @@ class Square:
             self,
             color
     ):
-        return self.isempty or self.has_rival_piece(color)
+        return self.isempty() or self.has_rival_piece(color)
 
     # check that move is in the board
     @staticmethod
