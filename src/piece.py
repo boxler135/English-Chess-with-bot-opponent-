@@ -32,7 +32,7 @@ class Piece:
             f'assets/images/imgs-{size}px/{self.color}_{self.name}.png'
         )
     
-    def add_moves(
+    def add_move(
             self,
             move
     ):
