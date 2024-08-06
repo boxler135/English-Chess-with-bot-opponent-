@@ -11,6 +11,7 @@ from settings import (
 )
 from board import Board
 from dragger import Dragger
+from config import Config
 
 
 class Game:
@@ -20,6 +21,7 @@ class Game:
         self.hovered_sqr = None
         self.board = Board()
         self.dragger = Dragger()
+        self.config = Config()
     
     # blit methods
 
@@ -28,19 +30,19 @@ class Game:
             self,
             surface
     ):
+        theme = self.config.theme
+
         for row in range(ROWS):
             for col in range(COLS):
-                if (row+col) % 2 == 0:
-                    color = (234, 235, 200) #green color
-                else:
-                    color = (119, 154, 88) #dark green color
-                
+                # color
+                color = theme.bg.light if (row+col)%2==0 else theme.bg.dark
+                # rect
                 rect = (
                     col * SQSIZE,
                     row * SQSIZE,
                     SQSIZE, SQSIZE
                 )
-
+                # blit
                 pygame.draw.rect(
                     surface,
                     color,
@@ -70,15 +72,15 @@ class Game:
             self,
             surface
     ):
+        theme = self.config.theme
+
         if self.dragger.dragging:
             piece = self.dragger.piece
 
             # loop all valid moves
             for move in piece.moves:
                 # color
-                color = '#C86464' if (
-                    move.final.row + move.final.col
-                ) % 2 == 0 else '#C84646'
+                color = theme.moves.light if (move.final.row+move.final.col)%2==0 else theme.moves.dark
                 # rect
                 rect = (
                     move.final.col * SQSIZE,
@@ -97,15 +99,15 @@ class Game:
             self,
             surface
     ):
+        theme = self.config.theme
+
         if self.board.last_move:
             initial = self.board.last_move.initial
             final = self.board.last_move.final
 
             for pos in [initial, final]:
                 # color
-                color = (244, 247, 116) if (
-                    pos.row + pos.col
-                ) % 2 == 0 else (172, 195, 51)
+                color = theme.trace.light if (pos.row+pos.col)%2==0 else theme.trace.dark
                 # rect
                 rect = (pos.col * SQSIZE,
                         pos.row * SQSIZE,
@@ -152,3 +154,6 @@ class Game:
             col
     ):
         self.hovered_sqr = self.board.squares[row][col]
+
+    def change_theme(self):
+        self.config.change_theme()
