@@ -38,6 +38,9 @@ class Piece:
     ):
         self.moves.append(move)
 
+    def clear_moves(self):
+        self.moves = []
+
 class Pawn(Piece):
 
     def __init__(
