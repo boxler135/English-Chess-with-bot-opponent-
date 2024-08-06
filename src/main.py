@@ -31,6 +31,7 @@ class Main:
         while 1:
             # show methods
             self.game.show_bg(screen)
+            game.show_last_move(screen)
             game.show_moves(screen)
             game.show_pieces(screen)
 
@@ -50,17 +51,20 @@ class Main:
                     # if clicked square has a piece
                     if board.squares[clicked_row][clicked_col].has_piece():
                         piece = board.squares[clicked_row][clicked_col].piece
-                        board.calc_moves(
-                            piece,
-                            clicked_row,
-                            clicked_col
-                        )
-                        dragger.save_initial(event.pos)
-                        dragger.drag_piece(piece)
-                        # show methods
-                        game.show_bg(screen)
-                        game.show_moves(screen)
-                        game.show_pieces(screen)
+                        # if is valid piece (color) 
+                        if piece.color == game.next_player:
+                            board.calc_moves(
+                                piece,
+                                clicked_row,
+                                clicked_col
+                            )
+                            dragger.save_initial(event.pos)
+                            dragger.drag_piece(piece)
+                            # show methods
+                            game.show_bg(screen)
+                            game.show_last_move(screen)
+                            game.show_moves(screen)
+                            game.show_pieces(screen)
 
                 # 2. target mouse motion
                 elif event.type == pygame.MOUSEMOTION:
@@ -68,6 +72,7 @@ class Main:
                         dragger.update_mouse(event.pos)
                         # show methods
                         game.show_bg(screen)
+                        game.show_last_move(screen)
                         game.show_moves(screen)
                         game.show_pieces(screen)
                         dragger.update_blit(screen)
@@ -100,7 +105,10 @@ class Main:
                             board.move(dragger.piece, move)
                             # show methods
                             game.show_bg(screen)
+                            game.show_last_move(screen)
                             game.show_pieces(screen)
+                            # next turn
+                            game.next_turn()
                     
                     dragger.undrag_piece()
 
