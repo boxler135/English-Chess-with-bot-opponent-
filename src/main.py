@@ -58,7 +58,8 @@ class Main:
                             board.calc_moves(
                                 piece,
                                 clicked_row,
-                                clicked_col
+                                clicked_col,
+                                bool=True
                             )
                             dragger.save_initial(event.pos)
                             dragger.drag_piece(piece)
@@ -109,7 +110,8 @@ class Main:
                             dragger.piece,
                             move
                         ):
-                            captured = board.squares[released_row][released_col].has_piece()
+                            captured = board.squares[
+                                released_row][released_col].has_piece()
                             # sounds
                             game.play_sound(captured)
 
