@@ -12,6 +12,7 @@ from settings import (
 from board import Board
 from dragger import Dragger
 from config import Config
+from square import Square
 
 
 class Game:
@@ -48,6 +49,43 @@ class Game:
                     color,
                     rect
                 )
+
+                # row coordinates
+                if col == 0:
+                    # color
+                    color = theme.bg.dark if row%2==0 else theme.bg.light
+                    # label
+                    lbl = self.config.font.render(
+                        str(ROWS-row),
+                        1,
+                        color
+                    )
+                    lbl_pos = (5, 5+row*SQSIZE)
+                    # blit
+                    surface.blit(
+                        lbl,
+                        lbl_pos
+                    )
+
+                # col coordinates
+                if row == 7:
+                    # color
+                    color = theme.bg.dark if (row+col)%2==0 else theme.bg.light
+                    # label
+                    lbl = self.config.font.render(
+                        Square.get_alphacol(col),
+                        1,
+                        color
+                    )
+                    lbl_pos = (
+                        col * SQSIZE + SQSIZE - 20,
+                        HEIGHT - 20
+                    )
+                    # blit
+                    surface.blit(
+                        lbl,
+                        lbl_pos
+                    )
 
     def show_pieces(
             self,
@@ -157,3 +195,15 @@ class Game:
 
     def change_theme(self):
         self.config.change_theme()
+
+    def play_sound(
+            self,
+            captured=False
+    ):
+        if captured:
+            self.config.capture_sound.play()
+        else:
+            self.config.move_sound.play()
+
+    def reset(self):
+        self.__init__()
