@@ -8,7 +8,7 @@ This project aims to develop a Chess AI bot that can play against human opponent
 The motivation behind this project is to delve into the fascinating world of artificial intelligence and game theory. Chess, with its complex strategies and deep history, provides an excellent platform to explore AI development. This project will serve as a practical exercise to enhance my skills in algorithm design, machine learning, and AI, while also creating something fun and engaging. Being the first end to end project that I will be working on alone I am excited to embark on this journey.
 
 ## Limitation
-Initially I wanted to code an AI bot to play against as well, along with option to choose difficulty. However, it deemed to be way too difficulty for me at my current stage. As such, I have decided to put a pause on the project for the time being and come back to code the AI bot after I have honed my proficiency in coding.
+Initially I wanted to code an AI bot to play against as well, along with option to choose difficulty. However, it deemed to be way too difficulty for me at my current stage. As such, I have decided to put a pause on the project for the time being and come back to code the AI bot after I have done more practice.
 
 I have 3 plans for the AI part which I will touch on in the future:
 
